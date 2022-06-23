@@ -7,7 +7,7 @@
 
     <div class="py-6">
         <div class="max-w-7xl min-h-screen mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white shadow-sm sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="bg-white border-b border-gray-200">
                     @if (session()->has('message'))
                         <div class="flex bg-green-300 px-4 py-3 mt-3" role="alert">
@@ -20,7 +20,7 @@
                             <span class="text-lg font-bold ml-3 my-auto">{{ session('message') }}</span>
                         </div>
                     @endif
-                    @hasrole('Adminn')
+                    @hasrole('Admin')
                     <a href="{{ route('pegawai.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2 float-right">Tambah PDPK</a>
                     @endhasrole
                     @canany(['bkpsdm','update pegawai'])
@@ -42,7 +42,7 @@
                             <th class="px-4 py-2 text-white w-16 ">No</th>
                             <th class="px-4 py-2 text-white">NIK</th>
                             <th class="px-4 py-2 text-white">Nama</th>
-                            <th class="px-4 py-2 text-white">Tempat, Tanggal Lahir</th>
+                            <th class="px-4 py-2 text-white">Tempat, <br/>Tanggal Lahir</th>
                             <th class="px-4 py-2 text-white">Usia</th>
                             <th class="px-4 py-2 text-white">Pendidikan</th>
                             <th class="px-4 py-2 text-white">Status</th>
@@ -57,7 +57,7 @@
                             @else
                                 @if($no % 2 == 0)
                                     <tr class="bg-gray-200">
-                                        
+
                                 @else
                                     <tr>
                                 @endif
@@ -65,7 +65,7 @@
                                 <td class="text-center">{{ $no = $no + 1 }}</td>
                                 <td class="text-center">{{ $pegawai->nik }}</td>
                                 <td>{{ strtoupper($pegawai->nama) }}</td>
-                                <td class="text-right">{{ ucwords($pegawai->tempat_lahir) }}, {{ \Carbon\Carbon::createFromFormat('Y-m-d', $pegawai->tanggal_lahir)->format('d-m-Y') }}</td>
+                                <td class="text-right">{{ ucwords($pegawai->tempat_lahir) }}, <br/>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $pegawai->tanggal_lahir)->format('d-m-Y') }}</td>
                                 <td class="text-center">{{ \Carbon\Carbon::parse($pegawai->tanggal_lahir)->age }}</td>
                                 <td class="text-center">{{ $pegawai->pendidikan->pendidikan }} </td>
                                 <td class="text-center">
@@ -103,7 +103,7 @@
                                         {{--@hasrole('Adminn')
                                         <button onclick="window.location='{{ route('pegawai.destroy', $pegawai->id) }}'" class="border-2 border-black-200 rounded-md p-1 hover:bg-red-300" title="Non-aktif">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-4 w-4 text-gray-500">
-                                                <path  stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                                <path  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" />
                                             </svg>
                                         </button>
