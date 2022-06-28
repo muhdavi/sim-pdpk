@@ -7,10 +7,6 @@ yarn-error.log
 bootstrap/compiled.php
 app/storage/
 
-# Laravel 5 & Lumen specific
-public/storage
-public/hot
-
 # Laravel 5 & Lumen specific with changed public path
 public_html/storage
 public_html/hot
@@ -28,3 +24,9 @@ docker-compose.override.yml
 .idea
 database
 log
+public/kk
+public/ktp
+public/str
+public/foto
+public/dpa
+public/ijazah
