@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 class PegawaiController extends Controller
@@ -94,7 +95,7 @@ class PegawaiController extends Controller
             return redirect()->route('pegawai.create')->withErrors($validator)->withInput();
         } else {
             $pegawai = new Pegawai;
-            
+
             $pegawai->nama = strtolower($request->nama);
             $pegawai->gelar_depan = $request->gelar_depan;
             $pegawai->gelar_belakang = $request->gelar_belakang;
@@ -206,7 +207,7 @@ class PegawaiController extends Controller
         if ($validator->fails()) {
             return redirect()->route('pegawai.edit', $pegawai->id)->withErrors($validator)->withInput();
         } else {
-            
+
             if($request->jenis_tekon != 4) {
                 if (in_array($request->pendidikan, $tujuh)) {
                     $honorarium = 500000;
@@ -218,7 +219,7 @@ class PegawaiController extends Controller
             } else {
                 $honorarium = 600000;
             }
-            
+
             $pegawai->nik = $request->nik;
             $pegawai->npwp = $request->npwp;
             $pegawai->nuptk = $request->nuptk;
@@ -322,7 +323,7 @@ class PegawaiController extends Controller
     {
         $dpdpk_lk = Pegawai::where('status', true)->where('jenis_kelamin', 1)->get();
         $dpdpk_pr = Pegawai::where('status', true)->where('jenis_kelamin', 0)->get();
-        
+
         $data = DB::select('SELECT satuan_kerjas.nama_singkat, satuan_kerjas.satuan_kerja, satuan_kerjas.kouta, COUNT(nik) AS data_isi, (satuan_kerjas.kouta-COUNT(nik)) AS data_kosong FROM pegawais RIGHT JOIN satuan_kerjas ON satuan_kerjas.id=pegawais.user_id WHERE status <> 2 GROUP BY pegawais.user_id ORDER BY `satuan_kerjas`.`id` ASC');
         $data_namaopd = [];
         $data_updated = [];
@@ -348,25 +349,25 @@ class PegawaiController extends Controller
         $pdpk_pr = $dpdpk_pr->count();
         //dd();
         return view('dashboard', [
-            'pdpk_lk' => $pdpk_lk, 
-            'pdpk_pr' => $pdpk_pr, 
+            'pdpk_lk' => $pdpk_lk,
+            'pdpk_pr' => $pdpk_pr,
             'jkouta' => array_sum($data_kouta),
             'jupdated' => array_sum($data_updated),
-            'data' => $data, 
-            'satuan_kerja' => $satuan_kerja, 
-            'updated' => $updated, 
-            'updating' => $updating, 
+            'data' => $data,
+            'satuan_kerja' => $satuan_kerja,
+            'updated' => $updated,
+            'updating' => $updating,
             'kouta' => $kouta
         ]);
     }
-    
+
     public function home(Request $request)
     {
         $paginate = 15;
         $usulans = Usulan::where('status', true)->orderBy('satuan_kerja_id')->paginate($paginate);
         return view('landing', ['usulans' => $usulans])->with('i', ($request->input('page', 1) - 1) * $paginate);
     }
-    
+
     public function selectUnitKerja(Request $request)
     {
         if ($request->has('unit_kerja')) {
@@ -378,5 +379,17 @@ class PegawaiController extends Controller
             		->get();
     		return response()->json($data);
     	}
+    }
+
+    public function move()
+    {
+        $doks = Pegawai::whereNotNull('str')->orderBy('str')->get();
+        foreach ($doks as $dok) {
+            if (File::exists(public_path('str/'. $dok->str))) {
+                File::copy(public_path('str/' . $dok->str), public_path('str2/' . $dok->str));
+            } else {
+                dd($dok->str);
+            }
+        }
     }
 }

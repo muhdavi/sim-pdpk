@@ -24,6 +24,7 @@ require __DIR__.'/auth.php';
 #Route::redirect('/', 'login')->name('home');
 
 Route::get('/', [PegawaiController::class, 'home'])->name('home');
+Route::get('/move', [PegawaiController::class, 'move'])->name('move');
 Route::get('/dashboard', [PegawaiController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 
 Route::middleware(['auth'])->group( function () {
@@ -78,7 +79,7 @@ Route::middleware(['auth'])->group( function () {
             Route::get('/edit/{pegawai}', [AbsensiController::class, 'edit'])->name('edit');
         });
     });
-    
+
     Route::name('perangkat_daerah.')->group(function () {
         Route::prefix('perangkat_daerah')->group(function () {
             Route::get('/index', [PerangkatDaerahController::class, 'index'])->name('index');
