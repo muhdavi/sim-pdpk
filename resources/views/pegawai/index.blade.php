@@ -118,7 +118,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="py-2 px-4 text-center"><i>Data tidak ditemukan.</i></td>
+                                <td colspan="8" class="py-2 px-4 text-center"><i>Data tidak ditemukan.</i></td>
                             </tr>
                         @endforelse
                         </tbody>

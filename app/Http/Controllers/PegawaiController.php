@@ -250,35 +250,35 @@ class PegawaiController extends Controller
 
             if ($request->hasFile("foto")) {
                 $foto = $request->foto;
-                $fn_foto = $pegawai->nama . "_" . $pegawai->nik . "_" . time() . "." . $foto->getClientOriginalExtension();
+                $fn_foto = $pegawai->nama . "_" . $pegawai->nik . "." . $foto->getClientOriginalExtension();
                 $foto->move(public_path('foto'), $fn_foto);
                 $pegawai->foto = $fn_foto;
             }
 
             if ($request->hasFile("ktp")) {
                 $ktp = $request->ktp;
-                $fn_ktp = $pegawai->nama . "_" . $pegawai->nik . "_" . time() . "." . $ktp->getClientOriginalExtension();
+                $fn_ktp = $pegawai->nama . "_" . $pegawai->nik . "." . $ktp->getClientOriginalExtension();
                 $ktp->move(public_path('ktp'), $fn_ktp);
                 $pegawai->ktp = $fn_ktp;
             }
 
             if ($request->hasFile("kk")) {
                 $kk = $request->kk;
-                $fn_kk = $pegawai->nama . "_" . $pegawai->nik . "_" . time() . "." . $kk->getClientOriginalExtension();
+                $fn_kk = $pegawai->nama . "_" . $pegawai->nik . "." . $kk->getClientOriginalExtension();
                 $kk->move(public_path('kk'), $fn_kk);
                 $pegawai->kk = $fn_kk;
             }
 
             if ($request->hasFile("ijazah")) {
                 $ijazah = $request->ijazah;
-                $fn_ijazah = $pegawai->nama . "_" . $pegawai->nik . "_" . time() . "." . $ijazah->getClientOriginalExtension();
+                $fn_ijazah = $pegawai->nama . "_" . $pegawai->nik . "." . $ijazah->getClientOriginalExtension();
                 $ijazah->move(public_path('ijazah'), $fn_ijazah);
                 $pegawai->ijazah = $fn_ijazah;
             }
 
             if ($request->hasFile("str")) {
                 $str = $request->str;
-                $fn_str = $pegawai->nama . "_" . $pegawai->nik . "_" . time() . "." . $str->getClientOriginalExtension();
+                $fn_str = $pegawai->nama . "_" . $pegawai->nik . "." . $str->getClientOriginalExtension();
                 $str->move(public_path('str'), $fn_str);
                 $pegawai->str = $fn_str;
             }

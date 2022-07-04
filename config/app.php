@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC+7',
+    'timezone' => 'Asia/Jakarta',
 
     /*
     |--------------------------------------------------------------------------
@@ -184,7 +184,7 @@ return [
          * dompdf -> https://github.com/barryvdh/laravel-dompdf
          */
         Barryvdh\DomPDF\ServiceProvider::class,
-        
+
         /*
          * qrqode
          */

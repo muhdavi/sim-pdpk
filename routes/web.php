@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\DokumenPelaksanaanAnggaranController;
+use App\Http\Controllers\HondaController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsulanController;
@@ -39,6 +40,13 @@ Route::middleware(['auth'])->group( function () {
             Route::post('/destroy/{pegawai}', [PegawaiController::class, 'destroy'])->name('destroy');
             Route::get('/show/{pegawai}', [PegawaiController::class, 'show'])->name('show');
             Route::get('/reject/{pegawai}', [PegawaiController::class, 'reject'])->name('reject');
+        });
+    });
+
+    Route::name('honda.')->group(function () {
+        Route::prefix('honda')->group(function () {
+            Route::get('/index', [HondaController::class, 'index'])->name('index');
+            Route::get('/create', [HondaController::class, 'create'])->name('create');
         });
     });
 

@@ -29,6 +29,11 @@
                         {{ __('DPA') }}
                     </x-nav-link> --}}
                     @endhasanyrole
+                    @hasanyrole('Admin')
+                    <x-nav-link :href="route('honda.index')" :active="request()->routeIs('honda.index')">
+                        {{ __('HONDA') }}
+                    </x-nav-link>
+                    @endhasanyrole
                     @unlessrole('SuperAdmin|Keuangan')
                         <x-nav-link :href="route('usulan.index')" :active="request()->routeIs('usulan.index')">
                             {{ __('Usulan') }}

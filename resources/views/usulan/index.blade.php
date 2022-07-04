@@ -146,7 +146,7 @@
                                 @hasrole('Kepegawaian')
                                     <td colspan="7" class="py-2 px-4 text-center"><i>Data tidak ditemukan.</i></td>
                                 @else
-                                    <td colspan="6" class="py-2 px-4 text-center"><i>Data tidak ditemukan.</i></td>
+                                    <td colspan="8" class="py-2 px-4 text-center"><i>Data tidak ditemukan.</i></td>
                                 @endhasrole
                             </tr>
                         @endforelse
