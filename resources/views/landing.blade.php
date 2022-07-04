@@ -11,9 +11,9 @@
     <meta property="og:url" content="https://pdpk.acehtimurkab.go.id"/>
     <meta property="og:description" content="Sistem Informasi Pegawai Daerah dengan Perjanjian Kerja" />
     <meta property="og:image" content="{{ asset('assets/images/SIM-PDPK-BIRU.png') }}"/>
-    
+
     <title>SIM-PDPK</title>
-    
+
     <link href="{{ asset('assets/images/favicon.png') }}" rel="shortcut icon">
     <link href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
     <!--Replace with your tailwind.css once created-->
@@ -447,7 +447,7 @@
         <div class="w-full mb-4">
             <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
         </div>
-        
+
         <!-- table from agenda -->
         <div class="overflow-x-auto">
             <div class="min-w-screen min-h-screen bg-gray-100 flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
@@ -533,12 +533,12 @@
         <div class="w-full mb-4">
             <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
         </div>
-        
+
         <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
             <!-- Start of component -->
             <div class="max-w-sm bg-white border-2 border-gray-300 p-6 rounded-md tracking-wide shadow-lg">
                 <div id="header" class="flex items-center mb-4">
-                    <img alt="avatar" class="w-20 h-20 rounded-full border-2 border-gray-300" src="https://pdpk.acehtimurkab.go.id/foto/teuku-didi-farisha.jpg" />
+                    <img alt="avatar" class="w-20 h-20 rounded-full border-2 border-gray-300" src="https://pdpk.acehtimurkab.go.id/foto/avatar-icon-images-4.jpeg" />
                     <div id="header-text" class="leading-5 ml-6 sm">
                         <h4 id="name" class="text-xl font-semibold text-black">TEUKU DIDI FARISHA, S.STP., M.AP</h4>
                         <h5 id="job" class="font-semibold text-blue-600">KEPALA BKPSDM</h5>
@@ -550,12 +550,12 @@
             </div>
             <!-- End of component -->
         </div>
-        
+
         <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
             <!-- Start of component -->
             <div class="max-w-sm bg-white border-2 border-gray-300 p-6 rounded-md tracking-wide shadow-lg">
                 <div id="header" class="flex items-center mb-4">
-                    <img alt="avatar" class="w-20 h-20 rounded-full border-2 border-gray-300" src="https://pdpk.acehtimurkab.go.id/foto/aryanti_1103036312890002_1625561188.jpg" />
+                    <img alt="avatar" class="w-20 h-20 rounded-full border-2 border-gray-300" src="https://pdpk.acehtimurkab.go.id/foto/avatar-icon-images-4.jpeg" />
                     <div id="header-text" class="leading-5 ml-6 sm">
                         <h4 id="name" class="text-xl font-semibold text-black">ARYANTI, SP</h4>
                         <h5 id="job" class="font-semibold text-blue-600">PDPK BKPSDM</h5>
@@ -567,12 +567,12 @@
             </div>
             <!-- End of component -->
         </div>
-    
+
         <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
             <!-- Start of component -->
             <div class="max-w-sm bg-white border-2 border-gray-300 p-6 rounded-md tracking-wide shadow-lg">
                 <div id="header" class="flex items-center mb-4">
-                    <img alt="avatar" class="w-20 h-20 rounded-full border-2 border-gray-300" src="https://pdpk.acehtimurkab.go.id/foto/hermansyah.jpeg" />
+                    <img alt="avatar" class="w-20 h-20 rounded-full border-2 border-gray-300" src="https://pdpk.acehtimurkab.go.id/foto/avatar-icon-images-4.jpeg" />
                     <div id="header-text" class="leading-5 ml-6 sm">
                         <h4 id="name" class="text-xl font-semibold text-black">HERMANSYAH, S.Sos.I</h4>
                         <h5 id="job" class="font-semibold text-blue-600">HABA ACEH TIMUR</h5>
@@ -584,7 +584,7 @@
             </div>
             <!-- End of component mohd-fuad-abrar.jpeg-->
         </div>
-        
+
     </div>
 </section>
 <!-- Change the colour #f8fafc to match the previous section colour -->
@@ -658,7 +658,7 @@
                     </li>
                 </ul>
             </div>
-        
+
             <div class="flex-1">
                 <p class="uppercase text-gray-500 md:mb-6">Sosial Media</p>
                 <ul class="list-reset mb-6">
@@ -670,7 +670,7 @@
                     </li>
                 </ul>
             </div>
-            
+
             <div class="flex-1">
                 <div>
                     <div class="block w-full">
