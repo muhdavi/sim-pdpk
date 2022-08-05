@@ -28,16 +28,16 @@ class PegawaiController extends Controller
         if (Auth::user()->satuan_kerja_id) {
             $pegawais = Pegawai::when($request->keyword, function ($query) use ($request) {
                 $query->where('nik', 'like', "%{$request->keyword}%")
-                ->orWhere('nama', 'like', "%{$request->keyword}%");
+                    ->orWhere('nama', 'like', "%{$request->keyword}%");
             })->whereHas('unit_kerja', function ($query) {
                 $query->where('satuan_kerja_id', '=', Auth::user()->satuan_kerja_id);
-            })->orderBy('vaksin_kedua')->orderBy('spkk')->paginate($pagination);
+            })->orderBy('status')->orderBy('nama')->paginate($pagination);
 
             $pegawais->appends($request->only('keyword'));
         } else {
             $pegawais = Pegawai::when($request->keyword, function ($query) use ($request) {
                 $query->where('nik', 'like', "%{$request->keyword}%")
-                ->orWhere('nama', 'like', "%{$request->keyword}%");
+                    ->orWhere('nama', 'like', "%{$request->keyword}%");
             })->orderBy('status')->paginate($pagination);
 
             $pegawais->appends($request->only('keyword'));
@@ -208,7 +208,7 @@ class PegawaiController extends Controller
             return redirect()->route('pegawai.edit', $pegawai->id)->withErrors($validator)->withInput();
         } else {
 
-            if($request->jenis_tekon != 4) {
+            if ($request->jenis_tekon != 4) {
                 if (in_array($request->pendidikan, $tujuh)) {
                     $honorarium = 500000;
                 } elseif (in_array($request->pendidikan, $enam)) {
@@ -324,22 +324,25 @@ class PegawaiController extends Controller
         $dpdpk_lk = Pegawai::where('status', true)->where('jenis_kelamin', 1)->get();
         $dpdpk_pr = Pegawai::where('status', true)->where('jenis_kelamin', 0)->get();
 
-        $data = DB::select('SELECT satuan_kerjas.nama_singkat, satuan_kerjas.satuan_kerja, satuan_kerjas.kouta, COUNT(nik) AS data_isi, (satuan_kerjas.kouta-COUNT(nik)) AS data_kosong FROM pegawais RIGHT JOIN satuan_kerjas ON satuan_kerjas.id=pegawais.user_id WHERE status <> 2 GROUP BY pegawais.user_id ORDER BY `satuan_kerjas`.`id` ASC');
+        $data = DB::select('SELECT satuan_kerjas.nama_singkat, satuan_kerjas.satuan_kerja, satuan_kerjas.kouta,
+                                    COUNT(nik) AS data_isi, (cast(satuan_kerjas.kouta as signed) - COUNT(nik)) AS data_kosong
+                                    FROM pegawais RIGHT JOIN satuan_kerjas ON satuan_kerjas.id=pegawais.user_id
+                                    WHERE status <> 2 GROUP BY pegawais.user_id ORDER BY `satuan_kerjas`.`id` ASC');
         $data_namaopd = [];
         $data_updated = [];
         $data_updating = [];
         $data_kouta = [];
-        foreach ( $data as $d ) {
-			array_push ( $data_namaopd, $d->nama_singkat );
+        foreach ($data as $d) {
+            array_push($data_namaopd, $d->nama_singkat);
         }
-        foreach ( $data as $d ) {
-			array_push ( $data_updated, $d->data_isi );
+        foreach ($data as $d) {
+            array_push($data_updated, $d->data_isi);
         }
-        foreach ( $data as $d ) {
-			array_push ( $data_updating, $d->data_kosong );
+        foreach ($data as $d) {
+            array_push($data_updating, $d->data_kosong);
         }
-        foreach ( $data as $d ) {
-			array_push ( $data_kouta, $d->kouta );
+        foreach ($data as $d) {
+            array_push($data_kouta, $d->kouta);
         }
         $satuan_kerja = json_encode($data_namaopd);
         $kouta = json_encode($data_kouta, JSON_NUMERIC_CHECK);
@@ -347,7 +350,7 @@ class PegawaiController extends Controller
         $updating = json_encode($data_updating, JSON_NUMERIC_CHECK);
         $pdpk_lk = $dpdpk_lk->count();
         $pdpk_pr = $dpdpk_pr->count();
-        //dd();
+
         return view('dashboard', [
             'pdpk_lk' => $pdpk_lk,
             'pdpk_pr' => $pdpk_pr,
@@ -371,21 +374,21 @@ class PegawaiController extends Controller
     public function selectUnitKerja(Request $request)
     {
         if ($request->has('unit_kerja')) {
-    		$cari = $request->unit_kerja;
-    		//$data = DB::table('unit_kerjas')->select('id', 'unit_kerja')->where('unit_kerja', 'LIKE', '%$cari%')->get();
-    		$data = UnitKerja::select("id","unit_kerja")
-            		->Where('satuan_kerja_id', Auth::user()->satuan_kerja_id)
-            		->where('unit_kerja','LIKE',"%$cari%")
-            		->get();
-    		return response()->json($data);
-    	}
+            $cari = $request->unit_kerja;
+            //$data = DB::table('unit_kerjas')->select('id', 'unit_kerja')->where('unit_kerja', 'LIKE', '%$cari%')->get();
+            $data = UnitKerja::select("id", "unit_kerja")
+                ->Where('satuan_kerja_id', Auth::user()->satuan_kerja_id)
+                ->where('unit_kerja', 'LIKE', "%$cari%")
+                ->get();
+            return response()->json($data);
+        }
     }
 
     public function move()
     {
         $doks = Pegawai::whereNotNull('str')->orderBy('str')->get();
         foreach ($doks as $dok) {
-            if (File::exists(public_path('str/'. $dok->str))) {
+            if (File::exists(public_path('str/' . $dok->str))) {
                 File::copy(public_path('str/' . $dok->str), public_path('str2/' . $dok->str));
             } else {
                 dd($dok->str);

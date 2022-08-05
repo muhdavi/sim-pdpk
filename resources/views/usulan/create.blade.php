@@ -58,16 +58,14 @@
                                 </svg>
                                 <select class="border border-gray-300 rounded-md text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none"
                                         name="jenis_kebutuhan" autofocus>
-                                    @if(Auth::user()->satuan_kerja_id == 4)
                                     <option value="1">Perpanjangan</option>
-                                    @endif
                                     <option value="0">Pengangkatan Baru</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="flex mt-4">
-                            <span class="flex border border-2 rounded-md px-4 py-2 bg-gray-300 w-60">Nomor Agenda Usulan</span>
+                            <span class="flex border border-2 rounded-md px-4 py-2 bg-gray-300 w-60">Nomor Usulan</span>
                             <x-input class="flex w-80 mx-2" type="text" name="nomor_agenda" required autofocus />
                         </div>
 
@@ -77,8 +75,25 @@
                         </div>
 
                         <div class="mt-4 flex">
-                            <span class="flex border border-2 rounded-md px-4 py-2 bg-gray-300 w-60">Tanggal</span>
-                            <span class="flex border border-2 rounded-md px-4 py-2 bg-gray-200 whitespace-no-wrap font-bold text-blue-800 mx-2">{{ date('d-m-Y') }}</span>
+                            <span class="flex border border-2 rounded-md px-4 py-2 bg-gray-300 w-60">Tanggal Usulan</span>
+                            <x-input class="flex w-72 mx-2" type="text" id="tanggal_pertek" name="tanggal" required autofocus placeholder="Tanggal"/>
+                        </div>
+
+                        <div class="mt-4 flex">
+                            <span class="flex border border-2 rounded-md px-4 py-2 bg-gray-300 w-60">Satuan Kerja</span>
+                            <div class="relative inline-flex mx-2">
+                                <svg class="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
+                                    <path fill="#648299" fill-rule="nonzero"
+                                          d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z" />
+                                </svg>
+                                <select class="border border-gray-300 rounded-md text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none"
+                                        name="satuan_kerja" autofocus>
+                                    <option value="-1">Pilih salah satu...</option>
+                                    @foreach($satuan_kerjas as $satuan_kerja)
+                                        <option value="{{ $satuan_kerja->id }}">{{ $satuan_kerja->satuan_kerja }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
 
                         <div class="flex items-center justify-end mt-4">
@@ -96,35 +111,3 @@
         </div>
     </div>
 </x-app-layout>
-<script>
-    $( function() {
-        var dateFormat = "yy-mm-dd",
-            from = $( "#periode_awal" )
-                .datepicker({
-                    defaultDate: "+1w",
-                    numberOfMonths: 3,
-                    dateFormat: 'yy-mm-dd',
-                })
-                .on( "change", function() {
-                    to.datepicker( "option", "minDate", getDate( this ) );
-                }),
-            to = $( "#periode_akhir" ).datepicker({
-                defaultDate: "+1w",
-                numberOfMonths: 3,
-                dateFormat: 'yy-mm-dd',
-            })
-                .on( "change", function() {
-                    from.datepicker( "option", "maxDate", getDate( this ) );
-                });
-
-        function getDate( element ) {
-            var date;
-            try {
-                date = $.datepicker.parseDate( dateFormat, element.value );
-            } catch( error ) {
-                date = null;
-            }
-            return date;
-        }
-    } );
-</script>

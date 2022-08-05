@@ -46,7 +46,8 @@ class UsulanController extends Controller
     public function create()
     {
         $periode = Periode::orderBy('id', 'desc')->first();
-        return view('usulan.create', ['periode' => $periode]);
+        $satuan_kerjas = SatuanKerja::all();
+        return view('usulan.create', ['periode' => $periode, 'satuan_kerjas' => $satuan_kerjas]);
     }
 
     /**
@@ -57,7 +58,6 @@ class UsulanController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $satuan_kerja_id = Auth::user()->satuan_kerja_id;
         $rules = [
             'nomor_agenda' => 'required',
             'perihal' => 'required',
@@ -76,11 +76,11 @@ class UsulanController extends Controller
         } else {
             $usulan = new Usulan;
 
-            $usulan->satuan_kerja_id = $satuan_kerja_id;
+            $usulan->satuan_kerja_id = $request->satuan_kerja;
             $usulan->jenis_kebutuhan = $request->jenis_kebutuhan;
             $usulan->nomor_agenda = $request->nomor_agenda;
             $usulan->perihal = $request->perihal;
-            $usulan->tanggal = date('Y-m-d');
+            $usulan->tanggal = $request->tanggal;
             $usulan->periode_id = $request->periode_id;
 
             $usulan->save();
@@ -144,7 +144,7 @@ class UsulanController extends Controller
                 $query->where('satuan_kerja_id', '=', Auth::user()->satuan_kerja_id);
             })->where('status', '=', $usulan->jenis_kebutuhan)->where('status_usulan', 0)->where('vaksin_kedua', 1)->whereNotNull('spkk')->orderBy('nama')->get();
         }
-        
+
         //$pegawais->whereNotIn('id', DB::table('absensi_2021')->select('pegawai_id')->where('ketidakhadiran', '<', 29)->get()->toArray())->get();
         //dd($pegawais);
         //DB::table('user')->select('id','name')->whereNotIn('id', DB::table('curses')->select('id_user')->where('id_user', '=', $id)->get()->toArray())->get();
@@ -161,7 +161,7 @@ class UsulanController extends Controller
             $sisa = $satuan_kerja->sisa;
             $jumlah_usulan = count($pegawai_id);
             if($jumlah_usulan > $sisa)
-            { 
+            {
                 $request->session()->flash("error", "Gagal...!!!Pegawai yang diusulkan melebihi kouta!");
                 return redirect()->route('usulan.index');
             } else {
@@ -211,7 +211,7 @@ class UsulanController extends Controller
             $data_usulan = $data->pegawai()->get();
             $return_data = ['pegawais' => $data_usulan, 'usulan' => $usulan->id];
         }
-        
+
         //dd($data_dpa);
         return view('usulan.verifikasi', $return_data);
     }
@@ -272,7 +272,7 @@ class UsulanController extends Controller
             }
         }
     }
-    
+
     public function pertek(Usulan $usulan)
     {
         $data = Usulan::findOrFail($usulan->id);
@@ -280,12 +280,12 @@ class UsulanController extends Controller
         //dd($status_pemda->count());
         return view('usulan.pertek', ['usulans' => $data, 'status_pemda' => $status_pemda]);
     }
-    
+
     public function pertek_store(Request $request, Usulan $usulan)
     {
         $usulan->nomor_pertek = $request->nomor_pertek;
         $usulan->tanggal_pertek = $request->tanggal_pertek;
-        
+
         $usulan->update();
         $request->session()->flash("message", "Pertimbangan Teknik berhasil diperbarui!");
         return redirect()->route('usulan.index');
@@ -327,7 +327,7 @@ class UsulanController extends Controller
             return $pdf->stream();
         }
     }
-    
+
     public function print_sk(Usulan $usulan)
     {
         $data = Usulan::findOrFail($usulan->id);
