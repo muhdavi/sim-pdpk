@@ -22,12 +22,12 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div id="jeniskelamin"></div>
                 </div>
-                
+
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div id="progress"></div>
                 </div>
-                
-                
+
+
                 <div class="bg-white border-b border-gray-200">
                     <table class="table-fixed w-full">
                         <thead class="bg-gray-700">
@@ -48,7 +48,7 @@
                                 <td class="odd:bg-white even:bg-gray-300 text-center">{{ $dt->kouta }}</td>
                                 <td class="odd:bg-white even:bg-gray-300 text-center">{{ $dt->data_isi }}</td>
                                 <td class="odd:bg-white even:bg-gray-300 text-center">{{ $dt->data_kosong }}</td>
-                                
+
                             </tr>
                         @endforeach
                         </tbody>
@@ -62,7 +62,7 @@
                         </tfoot>
                     </table>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -71,8 +71,8 @@
 <script type="text/javascript">
     var pdpk_lk = <?php echo $pdpk_lk ?>;
     var pdpk_pr = <?php echo $pdpk_pr ?>;
-    var tahun = 2021;
-    
+    var tahun = 2022;
+
     Highcharts.chart('jeniskelamin', {
     chart: {
         plotBackgroundColor: null,
@@ -126,7 +126,7 @@
     var updated = <?php echo $updated ?>;
     var updating = <?php echo $updating ?>;
     var kouta = <?php echo $kouta ?>;
-    
+
     Highcharts.chart('progress', {
     chart: {
         type: 'column'
