@@ -71,7 +71,8 @@
 <script type="text/javascript">
     var pdpk_lk = <?php echo $pdpk_lk ?>;
     var pdpk_pr = <?php echo $pdpk_pr ?>;
-    var tahun = 2022;
+    const d = new Date();
+    let tahun = d.getFullYear();
 
     Highcharts.chart('jeniskelamin', {
     chart: {
