@@ -36,7 +36,7 @@
                         <div class="-mx-3 md:flex mb-6">
                             <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                                 <x-label class="tracking-wide mb-2" for="nik" :value="__('Nomor Induk Kependudukan (NIK)')"/>
-                                <x-input class="appearance-none block w-full py-3 px-4" type="text" id="nik" name="nik" value="{{ $pegawai->nik }}" required autofocus placeholder="11032010012021"/>
+                                <x-input class="appearance-none block w-full py-3 px-4" type="text" id="nik" name="nik" value="{{ $pegawai->nik }}" readonly />
                             </div>
                             <div class="md:w-1/2 px-3">
                                 <x-label class="tracking-wide mb-2" for="npwp" :value="__('Nomor Pokok Wajib Pajak (NPWP)')"/>
@@ -236,8 +236,8 @@
                                 </div>
                             @endif
                         </div>
-                    
-                        
+
+
                         <div class="-mx-3 md:flex mb-6">
                             <div class="md:w-1/2 px-3 mb-6 md:mb-0">
                                 <x-label class="tracking-wide mb-2" for="vaksin_pertama" :value="__('Vaksin Pertama')"/>

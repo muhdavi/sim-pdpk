@@ -72,6 +72,7 @@ class PegawaiController extends Controller
         $data = $request->all();
 
         $rules = [
+            'nik' => 'required|numeric|digits:16',
             'nama' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
@@ -82,12 +83,15 @@ class PegawaiController extends Controller
         $messages = [
             'required' => ':attribute wajib diisi!',
             'not_in' => ':attribute harus dipilih!',
+            'digits' => ':attribute seharusnya berjumlah :digits',
+            'numeric' => ':attribute harus berupa angka',
         ];
         $customAttributes = [
             'tempat_lahir' => 'Tempat Lahir',
             'tanggal_lahir' => 'Tanggal Lahir',
             'jenis_kelamin' => 'Jenis Kelamin',
-            'unit_kerja' => 'Unit Kerja'
+            'unit_kerja' => 'Unit Kerja',
+            'nik' => 'Nomor Induk Kependudukan',
         ];
         $validator = Validator::make($data, $rules, $messages, $customAttributes);
 
@@ -96,6 +100,7 @@ class PegawaiController extends Controller
         } else {
             $pegawai = new Pegawai;
 
+            $pegawai->nik = $request->nik;
             $pegawai->nama = strtolower($request->nama);
             $pegawai->gelar_depan = $request->gelar_depan;
             $pegawai->gelar_belakang = $request->gelar_belakang;
@@ -121,7 +126,6 @@ class PegawaiController extends Controller
     public function show(Pegawai $pegawai)
     {
         $data_pegawai = Pegawai::find($pegawai->id);
-//        dd($data_pegawai->operator);
         return view('pegawai.show', ['pegawai' => $data_pegawai]);
     }
 
@@ -169,7 +173,6 @@ class PegawaiController extends Controller
         $tujuh = array('8', '9', '10');
 
         $rules = [
-            'nik' => 'required|size:16',
             'pendidikan' => 'required|not_in:-1',
             'unit_kerja' => 'required|not_in:-1',
             'kecamatan' => 'required|not_in:-1',
@@ -185,11 +188,9 @@ class PegawaiController extends Controller
         ];
         $messages = [
             'required' => ':attribute wajib diisi...!',
-            'size' => ':attribute tidak lebih dari :size',
             'unique' => ':attribute telah terdaftar!',
         ];
         $customAttributes = [
-            'nik' => 'Nomor Induk Kependudukan',
             'jenis_tekon' => 'Jenis Tenaga Kontrak',
             'tempat_lahir' => 'Tempat Lahir',
             'tanggal_lahir' => 'Tanggal Lahir',
@@ -220,7 +221,6 @@ class PegawaiController extends Controller
                 $honorarium = 600000;
             }
 
-            $pegawai->nik = $request->nik;
             $pegawai->npwp = $request->npwp;
             $pegawai->nuptk = $request->nuptk;
             $pegawai->tempat_lahir = strtolower($request->tempat_lahir);
