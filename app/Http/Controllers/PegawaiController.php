@@ -139,7 +139,12 @@ class PegawaiController extends Controller
         $data_pegawai = Pegawai::find($pegawai->id);
         $pendidikans = Pendidikan::all();
         $kecamatans = Kecamatan::orderBy('kecamatan')->get();
-        $unit_kerjas = UnitKerja::where('satuan_kerja_id', Auth::user()->satuan_kerja_id)->orderBy('unit_kerja')->get();
+        if (Auth::user()->hasRole('Admin')) {
+            $satuan_kerja_id = $data_pegawai->unit_kerja->satuan_kerja_id;
+            $unit_kerjas = UnitKerja::where('satuan_kerja_id', $satuan_kerja_id)->orderBy('unit_kerja')->get();
+        } else {
+            $unit_kerjas = UnitKerja::where('satuan_kerja_id', Auth::user()->satuan_kerja_id)->orderBy('unit_kerja')->get();
+        }
         $jenis_tekons = JenisTenagaKontrak::all();
         //dd($data_pegawai->jenis_kelamin);
         return view('pegawai.edit', [
