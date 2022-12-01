@@ -76,7 +76,7 @@
                                 @endhasanyrole
                                 <td class="text-center">{{ $usulan->nomor_agenda }}</td>
                                 <td class="text-center">{{ date('d-m-Y', strtotime($usulan->tanggal)) }} </td>
-                                <td class="text-center">{{ $usulan->pegawai->count() }} </td>
+                                <td class="text-center">{{ $usulan->pegawai->whereNotIn('status',['2'])->count() }} </td>
                                 <td class="text-center">
                                     @if($usulan->jenis_kebutuhan == 1)
                                         <span

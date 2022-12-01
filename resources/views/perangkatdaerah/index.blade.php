@@ -28,6 +28,7 @@
                             <th class="px-4 py-2 text-white">Perangkat Daerah</th>
                             <th class="px-4 py-2 text-white w-56">Kepala Perangkat Daerah</th>
                             <th class="px-4 py-2 text-white w-20">Kouta</th>
+                            <th class="px-4 py-2 text-white w-20">Sisa</th>
                             <th class="px-4 py-2 text-white w-40">Jumlah Bulan</th>
                             <th class="px-4 py-2 text-white w-20">Aksi</th>
                         </tr>
@@ -44,6 +45,7 @@
                                 <td>{{ strtoupper($perangkat_daerah->satuan_kerja) }}</td>
                                 <td>{{ $perangkat_daerah->nama_kepala }}</td>
                                 <td class="text-center">{{ $perangkat_daerah->kouta }}</td>
+                                <td class="text-center">{{ $perangkat_daerah->sisa }}</td>
                                 <td class="text-center">{{ $perangkat_daerah->jumlah_bulan }}</td>
                                 <td class="px-2 py-2 text-gray-500">
                                     <div class="flex space-x-2 float-right">
