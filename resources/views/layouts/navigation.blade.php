@@ -16,12 +16,12 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    @hasanyrole('Admin|Keuangan')
+                    @hasanyrole('Admin|Keuangan|SuperAdmin')
                     <x-nav-link :href="route('perangkat_daerah.index')" :active="request()->routeIs('perangkat_daerah.index')">
                         {{ __('Perangkat Daerah') }}
                     </x-nav-link>
                     @endhasanyrole
-                    @hasanyrole('Kepegawaian|Admin')
+                    @hasanyrole('Kepegawaian|Admin|SuperAdmin')
                     <x-nav-link :href="route('pegawai.index')" :active="request()->routeIs('pegawai.index')">
                         {{ __('PDPK') }}
                     </x-nav-link>
@@ -29,7 +29,7 @@
                         {{ __('DPA') }}
                     </x-nav-link> --}}
                     @endhasanyrole
-                    @unlessrole('SuperAdmin|Keuangan')
+                    @unlessrole('Keuangan')
                         <x-nav-link :href="route('usulan.index')" :active="request()->routeIs('usulan.index')">
                             {{ __('Usulan') }}
                         </x-nav-link>
@@ -101,12 +101,12 @@
                 {{ __('Perangkat Daerah') }}
             </x-responsive-nav-link>
             @endhasanyrole
-            @hasanyrole('Kepegawaian|Admin')
+            @hasanyrole('Kepegawaian|Admin|SuperAdmin')
             <x-responsive-nav-link :href="route('pegawai.index')" :active="request()->routeIs('pegawai.index')">
                 {{ __('PDPK') }}
             </x-responsive-nav-link>
             @endhasanyrole
-            @unlessrole('SuperAdmin|Keuangan')
+            @unlessrole('SuperAdmin|Keuangan|SuperAdmin')
                 <x-responsive-nav-link :href="route('usulan.index')" :active="request()->routeIs('usulan.index')">
                     {{ __('Usulan') }}
                 </x-responsive-nav-link>
