@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
     <title>SIM-PDPK</title>
-    
+
     <style type="text/css">
         body {
             font-size: 12pt;
@@ -37,18 +37,18 @@
             border-collapse: collapse;
             width: 100%;
         }
-        
+
         table.data th {
             border: 1px solid black;
             border-collapse: collapse;
             width: 100%;
         }
-        
+
         table.data {
             border-collapse: collapse;
             width: 100%;
         }
-        
+
         table.data .no {
             width: 10px;
             padding: 5px;
@@ -114,7 +114,7 @@
     </style>
 </head>
 <body>
-    
+
 <script type="text/php">
     if ( isset($pdf) ) {
         // v.0.7.0 and greater
@@ -160,7 +160,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td class="right">1443 H</td>
+            <td class="right">1444 H</td>
         </tr>
     </table>
 </header>
