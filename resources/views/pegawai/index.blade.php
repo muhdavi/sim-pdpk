@@ -23,7 +23,7 @@
                     @hasrole('SuperAdmin')
                     <a href="{{ route('pegawai.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2 float-right">Tambah PDPK</a>
                     @endhasrole
-                    @canany(['bkpsdm','update pegawai'])
+                    @canany(['bkpsdm', 'update pegawai', 'kelola akun'])
                         <form action="{{ url()->current() }}" method="get">
                             <div class="my-2 mx-4 relative text-gray-600 float-right">
                               <input type="search" name="keyword" value="{{ request('keyword') }}" placeholder="Ketik NIK atau Nama..." class="bg-white h-10 w-80 px-5 pr-10 rounded text-sm focus:outline-none">
