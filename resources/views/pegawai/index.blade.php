@@ -20,7 +20,7 @@
                             <span class="text-lg font-bold ml-3 my-auto">{{ session('message') }}</span>
                         </div>
                     @endif
-                    @hasrole('SuperAdmin')
+                    @hasrole('SuperAdmin|Admin')
                     <a href="{{ route('pegawai.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2 float-right">Tambah PDPK</a>
                     @endhasrole
                     @canany(['bkpsdm', 'update pegawai', 'kelola akun'])

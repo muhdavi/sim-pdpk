@@ -42,7 +42,7 @@
                         <div class="-mx-3 md:flex mb-6">
                             <div class="md:w-1/3 px-3 mb-6 md:mb-0">
                                 <x-label class="tracking-wide mb-2" for="nik" :value="__('Nomor Induk Kependudukan (NIK)')"/>
-                                <x-input class="appearance-none block w-full py-3 px-4" type="text" id="nik" name="nik" autofocus placeholder="1103192012210001"/>
+                                <x-input class="appearance-none block w-full py-3 px-4" type="text" id="nik" name="nik" required autofocus placeholder="1103192012210001"/>
                             </div>
                         </div>
 
